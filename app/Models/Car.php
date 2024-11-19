@@ -28,4 +28,11 @@ class Car extends Model
                 'updated_at' => Carbon::now()
             ]);
     }
+
+    static function getCarsOfClient($client)
+    {
+        return DB::table('cars')
+            ->where('client_id', $client->id)
+            ->get();
+    }
 }

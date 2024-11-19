@@ -13,6 +13,7 @@ class ClientController extends Controller
     public function index()
     {
         $clientsAndCars = Client::getAllClientsAndCars()->paginate(10);
+
         return view('clients.index', compact('clientsAndCars'));
     }
 
@@ -37,16 +38,18 @@ class ClientController extends Controller
 
     public function show($clientId)
     {
-        $client = Client::showOneClient($clientId);
+        $client = Client::getClient($clientId);
 
         return view('clients.show', compact('client'));
     }
 
     public function edit($clientId)
     {
-        $client = Client::showOneCLient($clientId);
+        $client = Client::getClient($clientId);
+        $cars = Car::getCarsOfClient($client);
 
-        return view('clients.edit', compact('client'));
+
+        return view('clients.edit', compact('client', 'cars'));
     }
 
     public function update()

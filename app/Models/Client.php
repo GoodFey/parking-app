@@ -15,7 +15,7 @@ class Client extends Model
 
     protected $table = 'clients';
 
-    static function showOneClient($clientId)
+    static function getClient($clientId)
     {
         $client = DB::table('clients')
             ->where('id', $clientId)

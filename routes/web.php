@@ -13,7 +13,7 @@ Route::post('/clients', [ClientController::class, 'store'])->name('clients.store
 
 Route::get('/edit/{client}', [ClientController::class, 'edit'])->name('clients.edit');
 //
-//Route::patch('/clients', [ClientController::class, 'update'])->name('clients.update');
+Route::patch('/clients', [ClientController::class, 'update'])->name('clients.update');
 
 
 
