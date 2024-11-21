@@ -32,12 +32,12 @@ class Client extends Model
         return $clientsAndCars;
     }
 
-    static function getLastCreatedClient()
+    static function getLastClientId()
     {
         $lastCreatedClient = DB::table('clients')
             ->orderBy('id', 'desc')
             ->first();
-        return $lastCreatedClient;
+        return $lastCreatedClient->id;
     }
 
     static function storeNewClient($data)
@@ -65,6 +65,12 @@ class Client extends Model
                 'address' => $data['address'],
                 'updated_at' => Carbon::now()
             ]);
+    }
+    static function deleteClient($clientId)
+    {
+        DB::table('clients')
+            ->where('id', $clientId)
+            ->delete();
     }
 
 }

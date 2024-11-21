@@ -75,7 +75,14 @@
             </form>
         </div>
         <div class="col align-self-end">
-            <button type="submit" class="btn btn-primary mb-3" form="formClient">Сохранить</button>
+            <div>
+                <button type="submit" class="btn btn-primary mb-3" form="formClient">Сохранить изменения</button>
+            </div>
+            <form action="{{ route('clients.delete', $client->id) }}" method="Post">
+                @csrf
+                @method('Delete')
+                <button type="submit" class="btn btn-danger mb-3">Удалить клиента</button>
+            </form>
         </div>
     </div>
 
@@ -137,7 +144,14 @@
                 </form>
             </div>
             <div class="col align-self-end">
-                <button type="submit" class="btn btn-primary mb-3" form="formAuto{{$i}}">Сохранить</button>
+                <div>
+                    <button type="submit" class="btn btn-primary mb-3" form="formAuto{{$i}}">Сохранить</button>
+                </div>
+                <form action="{{ route('cars.delete', $cars[$i]->id) }}" method="Post">
+                    @csrf
+                    @method('Delete')
+                    <button type="submit" class="btn btn-danger mb-3">Удалить машину</button>
+                </form>
             </div>
         </div>
     @endfor
@@ -148,40 +162,40 @@
                 @csrf
                 <div class="mb-3">
                     <label for="brandInput" class="form-label">Бренд автомобиля</label>
-                    <input type="text" class="form-control" id="brandInput" name="brand_create"
-                           placeholder="Обязательное поле" value="{{ old('brand_create') }}">
+                    <input type="text" class="form-control" id="brandInput" name="brand"
+                           placeholder="Обязательное поле" value="{{ old('brand') }}">
                     <div class="text-danger mt-1">
-                        @error('brand_create')
+                        @error('brand')
                         {{ $message }}
                         @enderror
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="modelInput" class="form-label">Модель автомобиля</label>
-                    <input type="text" class="form-control" id="modelInput" name="model_create"
-                           placeholder="Обязательное поле" value="{{ old('model_create') }}">
+                    <input type="text" class="form-control" id="modelInput" name="model"
+                           placeholder="Обязательное поле" value="{{ old('model') }}">
                     <div class="text-danger mt-1">
-                        @error('model_create')
+                        @error('model')
                         {{ $message }}
                         @enderror
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="colorInput" class="form-label">Цвет автомобиля</label>
-                    <input type="text" class="form-control" id="colorInput" name="color_of_carcass_create"
-                           placeholder="Обязательное поле" value="{{ old('color_of_carcass_create') }}">
+                    <input type="text" class="form-control" id="colorInput" name="color_of_carcass"
+                           placeholder="Обязательное поле" value="{{ old('color_of_carcass') }}">
                     <div class="text-danger mt-1">
-                        @error('color_of_carcass_create')
+                        @error('color_of_carcass')
                         {{ $message }}
                         @enderror
                     </div>
                 </div>
                 <div class="mb-3">
                     <label for="gosNumberInput" class="form-label">Государственный номер</label>
-                    <input type="number" class="form-control" id="gosNumberInput" name="gos_number_create"
-                           placeholder="Обязательное поле" value="{{ old('gos_number_create') }}">
+                    <input type="number" class="form-control" id="gosNumberInput" name="gos_number"
+                           placeholder="Обязательное поле" value="{{ old('gos_number') }}">
                     <div class="text-danger mt-1">
-                        @error('gos_number_create')
+                        @error('gos_number')
                         {{ $message }}
                         @enderror
                     </div>

@@ -103,6 +103,13 @@
                     </div>
                     @enderror
                 </div>
+                <div class="mb-3">
+                    <div class="form-check form-switch">
+                        <input class="form-check-input" type="checkbox" id="isOnParkingInput" name="is_on_parking_now"
+                               checked>
+                        <label class="form-check-label" for="isOnParkingInput">Машина на парковке</label>
+                    </div>
+                </div>
 
 
                 <div class="mb-3">

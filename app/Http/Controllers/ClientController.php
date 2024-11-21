@@ -29,10 +29,11 @@ class ClientController extends Controller
         $data = $request->validated();
 
         $data['gender'] == "Мужчина" ? $data['gender'] = 1 : $data['gender'] = 0;
+        $data['is_on_parking_now'] = isset ($data['is_on_parking_now']);
 
         Client::storeNewClient($data);
 
-        Car::storeNewCar($data, Client::getLastCreatedClient());
+        Car::storeNewCar($data, Client::getLastClientId());
 
         return redirect()->route('clients.index');
     }
@@ -47,7 +48,7 @@ class ClientController extends Controller
     public function edit($clientId)
     {
         $client = Client::getClient($clientId);
-        $cars = Car::getCarsOfClient($client);
+        $cars = Car::getCarsOfClient($client->id);
 
 
         return view('clients.edit', compact('client', 'cars'));
@@ -59,5 +60,14 @@ class ClientController extends Controller
         $data['gender'] == "Мужчина" ? $data['gender'] = 1 : $data['gender'] = 0;
         Client::updateClient($clientId, $data);
         return redirect()->route('clients.edit', $clientId);
+    }
+
+    public function delete($clientId)
+    {
+
+        Car::deleteCarsThisClient($clientId);
+        Client::deleteClient($clientId);
+
+        return redirect()->route('clients.index');
     }
 }

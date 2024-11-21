@@ -30,9 +30,9 @@
             <th scope="col">ФИО</th>
             <th scope="col">Автомобиль</th>
             <th scope="col">Номер Автомобиля</th>
-            <th scope="col">Посмотреть</th>
-            <th scope="col">Изменить</th>
+            <th scope="col">Редактировать</th>
             <th scope="col">Удалить</th>
+
         </tr>
         </thead>
         <tbody>
@@ -41,15 +41,24 @@
                 <th scope="row">{{$item->fio}}</th>
                 <th scope="row">{{$item->brand}}</th>
                 <th scope="row">{{$item->gos_number}}</th>
+                {{--            @foreach(\App\Models\Car::getCarsOfClient($item->id) as $car)--}}
+                {{--                    <th scope="row">{{$car->brand}}</th>--}}
+                {{--                    <th scope="row">{{$car->gos_number}}</th>--}}
+                {{--                @endforeach--}}
+
                 <th>
-                    <a href="{{ route('clients.show', $item->id) }}">Посмотреть</a>
+                    <form action="{{ route('clients.edit', $item->id) }}">
+                        <input type="submit" class="btn btn-primary mb-3" value="Редактировать">
+                    </form>
                 </th>
+
                 <th>
-                    <a href="{{ route('clients.edit', $item->id) }}">Редактировать</a>
-                </th>
-                </th>
-                <th>
-                    <a href="{{ route('clients.show', $item->id) }}">Удалить</a>
+                    <form action="{{ route('cars.delete', $item->id) }}" method="Post">
+                        @csrf
+                        @method('Delete')
+                        <input type="submit" class="btn btn-danger mb-3" value="Удалить">
+                    </form>
+
                 </th>
             </tr>
         @endforeach

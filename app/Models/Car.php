@@ -15,25 +15,25 @@ class Car extends Model
 
     protected $table = 'cars';
 
-    static function storeNewCar($request, $lastCreatedClient)
+    static function storeNewCar($data, $currentClientId)
     {
         DB::table('cars')
             ->insert([
-                'brand' => $request['brand'],
-                'model' => $request['model'],
-                'color_of_carcass' => $request['color_of_carcass'],
-                'gos_number' => $request['gos_number'],
-                'is_on_parking_now' => 1,
-                'client_id' => $lastCreatedClient->id,
+                'brand' => $data['brand'],
+                'model' => $data['model'],
+                'color_of_carcass' => $data['color_of_carcass'],
+                'gos_number' => $data['gos_number'],
+                'is_on_parking_now' => $data['is_on_parking_now'],
+                'client_id' => $currentClientId,
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now()
             ]);
     }
 
-    static function getCarsOfClient($client)
+    static function getCarsOfClient($clientId)
     {
         return DB::table('cars')
-            ->where('client_id', $client->id)
+            ->where('client_id', $clientId)
             ->get();
     }
 
@@ -50,5 +50,24 @@ class Car extends Model
                 'is_on_parking_now' => $data['is_on_parking_now'],
                 'updated_at' => Carbon::now()
             ]);
+    }
+
+    public static function deleteCarsThisClient($clientId)
+    {
+        DB::table('cars')
+            ->where('client_id', $clientId)
+            ->delete();
+    }
+
+    public static function deleteCar($carId)
+    {
+        DB::table('cars')
+            ->where('id', $carId)
+            ->delete();
+    }
+
+    public static function test()
+    {
+        return'privet';
     }
 }
