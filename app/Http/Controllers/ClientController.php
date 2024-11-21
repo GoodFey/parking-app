@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\Client\StoreRequest;
+use App\Http\Requests\Client\UpdateRequest;
 use App\Models\Car;
 use App\Models\Client;
 use Illuminate\Http\Request;
@@ -52,8 +53,11 @@ class ClientController extends Controller
         return view('clients.edit', compact('client', 'cars'));
     }
 
-    public function update()
+    public function update($clientId, UpdateRequest $request)
     {
-        return "";
+        $data = $request->validated();
+        $data['gender'] == "Мужчина" ? $data['gender'] = 1 : $data['gender'] = 0;
+        Client::updateClient($clientId, $data);
+        return redirect()->route('clients.edit', $clientId);
     }
 }

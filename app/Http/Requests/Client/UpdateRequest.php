@@ -3,8 +3,9 @@
 namespace App\Http\Requests\Client;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class StoreRequest extends FormRequest
+class UpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -21,16 +22,27 @@ class StoreRequest extends FormRequest
      */
     public function rules(): array
     {
-        return [
-            'fio' => 'required|string|min:3',
-            'gender' => 'required|string|max:7',
-            'phone_number' => 'required|string|unique:clients,phone_number',
-            'address' => 'nullable|string',
-            'brand' => 'required|string',
-            'model' => 'required|string',
-            'color_of_carcass' => 'required|string',
-            'gos_number' => 'required|integer|unique:cars,gos_number',
-        ];
+
+        if (request()->routeIs('clients.update')) {
+
+            return [
+                'fio' => 'required|min:3',
+                'gender' => 'required|max:7',
+                'phone_number' => ['required',
+                    Rule::unique('clients', 'phone_number')->ignore($this->client)],
+                'address' => 'nullable|string',
+            ];
+        } elseif (request()->routeIs('cars.update')) {
+            return [
+                'brand' => 'required',
+                'model' => 'required',
+                'color_of_carcass' => 'required',
+                'gos_number' => ['required',
+                    Rule::unique('cars', 'gos_number')->ignore($this->car)],
+                'is_on_parking_now' => 'nullable'
+            ];
+        }
+        return [];
     }
 
     public function messages()
@@ -44,10 +56,11 @@ class StoreRequest extends FormRequest
             'model.required' => 'Это поле должно быть заполнено',
             'color_of_carcass.required' => 'Это поле должно быть заполнено',
             'gos_number.required' => 'Это поле должно быть заполнено',
+            'gos_number.unique' => 'Такой номер уже зарегистрирован',
 
             'fio.min' => 'Это поле должно содержать минимум 3 символа',
-            'phone_number.unique' => 'Такой номер уже зарегистрирован',
-            'gos_number.unique' => 'Такой номер уже зарегистрирован',
+            'phone_number.unique' => 'Этот номер уже внесен в базу',
+
 
         ];
     }

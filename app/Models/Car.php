@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\DB;
 class Car extends Model
 {
     use HasFactory;
+
     protected $guarded = false;
 
     protected $table = 'cars';
@@ -34,5 +35,20 @@ class Car extends Model
         return DB::table('cars')
             ->where('client_id', $client->id)
             ->get();
+    }
+
+    static function updateCar($carId, $data)
+    {
+
+        DB::table('cars')
+            ->where('id', $carId)
+            ->update([
+                'brand' => $data['brand'],
+                'model' => $data['model'],
+                'color_of_carcass' => $data['color_of_carcass'],
+                'gos_number' => $data['gos_number'],
+                'is_on_parking_now' => $data['is_on_parking_now'],
+                'updated_at' => Carbon::now()
+            ]);
     }
 }

@@ -54,5 +54,17 @@ class Client extends Model
 
     }
 
+    static function updateClient($clientId, $data)
+    {
+        DB::table('clients')
+            ->where('id', $clientId)
+            ->update([
+                'fio' => $data['fio'],
+                'gender' => $data['gender'],
+                'phone_number' => $data['phone_number'],
+                'address' => $data['address'],
+                'updated_at' => Carbon::now()
+            ]);
+    }
 
 }
