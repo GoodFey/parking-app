@@ -22,9 +22,9 @@ class StoreRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'brand' => 'required|string',
-            'model' => 'required|string',
-            'color_of_carcass' => 'required|string',
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'color_of_carcass' => 'required|string|max:255',
             'gos_number' => 'required|integer|unique:cars,gos_number',
             'is_on_parking_now' => 'nullable'
         ];

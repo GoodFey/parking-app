@@ -24,11 +24,11 @@ class StoreRequest extends FormRequest
         return [
             'fio' => 'required|string|min:3',
             'gender' => 'required|string|max:7',
-            'phone_number' => 'required|string|unique:clients,phone_number',
-            'address' => 'nullable|string',
-            'brand' => 'required|string',
-            'model' => 'required|string',
-            'color_of_carcass' => 'required|string',
+            'phone_number' => 'required|string|unique:clients,phone_number|max:255',
+            'address' => 'nullable|string|max:255',
+            'brand' => 'required|string|max:255',
+            'model' => 'required|string|max:255',
+            'color_of_carcass' => 'required|string|max:255',
             'gos_number' => 'required|integer|unique:cars,gos_number',
             'is_on_parking_now' => 'nullable'
         ];
