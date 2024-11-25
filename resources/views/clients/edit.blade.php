@@ -12,7 +12,7 @@
 <div class="container">
     <div class="row">
         <div class="col-6">
-            <h1>Edit client page</h1>
+            <h1>Изменить информацию о клиенте и его автомобилях</h1>
         </div>
         <form action="{{ route('cars.index') }}" class="col">
             <button type="submit" class="btn btn-primary mt-3">Назад</button>
@@ -20,7 +20,7 @@
     </div>
     <div class="row">
         <div class="col-6 border rounded-3">
-            <h3>Edit information about client</h3>
+            <h3>Клиент</h3>
             <form action="{{ route('clients.update', $client->id) }}" method="Post" id="formClient">
                 @csrf
                 @method('Patch')
@@ -89,7 +89,7 @@
     @for($i=0; $i < count($cars); $i++)
         <div class="row mt-3">
             <div class="col-6 border rounded-3">
-                <h3>Edit information about {{$i+1}} auto</h3>
+                <h3>{{$i+1}} автомобиль</h3>
                 <form action="{{ route('cars.update', $cars[$i]->id) }}" method="Post" id="formAuto{{$i}}">
                     @csrf
                     @method('Patch')
@@ -145,7 +145,7 @@
             </div>
             <div class="col align-self-end">
                 <div>
-                    <button type="submit" class="btn btn-primary mb-3" form="formAuto{{$i}}">Сохранить</button>
+                    <button type="submit" class="btn btn-primary mb-3" form="formAuto{{$i}}">Сохранить изменения</button>
                 </div>
                 <form action="{{ route('cars.delete', $cars[$i]->id) }}" method="Post">
                     @csrf
@@ -157,7 +157,7 @@
     @endfor
     <div class="row mt-3">
         <div class="col-6 border rounded-3">
-            <h3>Add new Auto</h3>
+            <h3>Добавить новый автомобиль</h3>
             <form action="{{ route('cars.store', $client->id) }}" id="create_new_auto" method="Post">
                 @csrf
                 <div class="mb-3">

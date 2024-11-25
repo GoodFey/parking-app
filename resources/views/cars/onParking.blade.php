@@ -10,7 +10,7 @@
 <body>
 
 <div class="container text-center">
-    <div class="row">
+    <div class="row align-items-center">
         <div class="col-6">
             <h1>Машины на стоянке</h1>
         </div>
@@ -24,9 +24,9 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <h1>
+            <h3>
                 Добавить машину на стоянку
-            </h1>
+            </h3>
             <div class="input-group mb-3">
                 <label class="input-group-text" for="inputSelectClient">Клиент</label>
                 <select class="form-select" id="inputSelectClient" onchange="loadSecondList()">
@@ -63,7 +63,7 @@
             </form>
             <div>
                 <button type="submit" class="btn btn-primary mt-1" form="selectCarForm">
-                    Добавить
+                    Добавить автомобиль на стоянку
                 </button>
             </div>
         </div>
