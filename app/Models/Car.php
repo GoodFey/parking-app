@@ -66,8 +66,45 @@ class Car extends Model
             ->delete();
     }
 
-    public static function test()
+    public static function getAllCars()
     {
-        return'privet';
+        return DB::table('cars')
+            ->orderBy('id', 'desc');
+    }
+
+    public static function getCarsOnParking()
+    {
+        return DB::table('cars')
+            ->where('is_on_parking_now', 1)
+            ->orderBy('updated_at', 'desc')
+            ->get();
+    }
+
+    public static function removeFromParking($carId)
+    {
+        DB::table('cars')
+            ->where('id', $carId)
+            ->update([
+                'is_on_parking_now' => 0
+            ]);
+    }
+
+    public static function addCarOnParking($carId)
+    {
+        DB::table('cars')
+            ->where('id', $carId)
+            ->update([
+                'is_on_parking_now' => 1
+            ]);
+    }
+
+    public static function changeParkingStatus($carId, $status)
+    {
+        DB::table('cars')
+            ->where('id', $carId)
+            ->update([
+                'is_on_parking_now' => $status,
+                'updated_at' => Carbon::now()
+            ]);
     }
 }

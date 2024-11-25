@@ -20,16 +20,8 @@ class Client extends Model
         $client = DB::table('clients')
             ->where('id', $clientId)
             ->first();
+
         return $client;
-    }
-
-    static function getAllClientsAndCars()
-    {
-        $clientsAndCars = DB::table('clients')
-            ->join('cars', 'clients.id', '=', 'cars.client_id');
-
-
-        return $clientsAndCars;
     }
 
     static function getLastClientId()
@@ -71,6 +63,14 @@ class Client extends Model
         DB::table('clients')
             ->where('id', $clientId)
             ->delete();
+    }
+
+    public static function getAllClients()
+    {
+        return DB::table('clients')
+            ->distinct()
+            ->orderBy('fio')
+            ->get();
     }
 
 }

@@ -14,7 +14,7 @@
         <div class="col-6">
             <h1>Edit client page</h1>
         </div>
-        <form action="{{ route('clients.index') }}" class="col">
+        <form action="{{ route('cars.index') }}" class="col">
             <button type="submit" class="btn btn-primary mt-3">Назад</button>
         </form>
     </div>

@@ -30,6 +30,7 @@ class StoreRequest extends FormRequest
             'model' => 'required|string',
             'color_of_carcass' => 'required|string',
             'gos_number' => 'required|integer|unique:cars,gos_number',
+            'is_on_parking_now' => 'nullable'
         ];
     }
 

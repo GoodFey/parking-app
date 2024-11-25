@@ -12,7 +12,14 @@
 
 <div class="container">
     <div class="row">
-        <h1>Create new client</h1>
+        <div class="col-6">
+            <h1>Create new client</h1>
+        </div>
+        <form action="{{ route('cars.index') }}" class="col">
+            <button type="submit" class="btn btn-primary mt-3">Назад</button>
+        </form>
+    </div>
+    <div class="row">
         <div class="col-6 border rounded-3">
             <h3>Add information about client</h3>
             <form action="{{ route('clients.store') }}" method="post">

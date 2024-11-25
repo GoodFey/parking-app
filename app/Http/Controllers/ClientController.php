@@ -11,13 +11,6 @@ use Illuminate\Support\Facades\DB;
 
 class ClientController extends Controller
 {
-    public function index()
-    {
-        $clientsAndCars = Client::getAllClientsAndCars()->paginate(10);
-
-        return view('clients.index', compact('clientsAndCars'));
-    }
-
     public function create()
     {
         return view('clients.create');
@@ -35,7 +28,7 @@ class ClientController extends Controller
 
         Car::storeNewCar($data, Client::getLastClientId());
 
-        return redirect()->route('clients.index');
+        return redirect()->route('cars.index');
     }
 
     public function show($clientId)
@@ -47,8 +40,9 @@ class ClientController extends Controller
 
     public function edit($clientId)
     {
+
         $client = Client::getClient($clientId);
-        $cars = Car::getCarsOfClient($client->id);
+        $cars = Car::getCarsOfClient($clientId);
 
 
         return view('clients.edit', compact('client', 'cars'));
@@ -70,4 +64,6 @@ class ClientController extends Controller
 
         return redirect()->route('clients.index');
     }
+
+
 }
