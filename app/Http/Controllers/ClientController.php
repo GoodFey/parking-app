@@ -62,7 +62,7 @@ class ClientController extends Controller
         Car::deleteCarsThisClient($clientId);
         Client::deleteClient($clientId);
 
-        return redirect()->route('clients.index');
+        return redirect()->route('cars.index');
     }
 
 
