@@ -26,9 +26,10 @@ class UpdateRequest extends FormRequest
 
         return [
             'fio' => 'required|string|min:3|max:100',
-            'gender' => 'required|string|max:7',
+            'gender' => 'required|boolean',
             'phone_number' => ['required', 'string',
-                Rule::unique('clients', 'phone_number')->ignore($this->client)],
+                Rule::unique('clients', 'phone_number')->ignore($this->client),
+                'regex:/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/'],
             'address' => 'nullable|string|max:255',
         ];
 
@@ -45,6 +46,7 @@ class UpdateRequest extends FormRequest
 
             'fio.min' => 'Это поле должно содержать минимум 3 символа',
             'phone_number.unique' => 'Этот номер уже внесен в базу',
+            'phone_number.regex' => 'Заполните номер полностью',
         ];
     }
 }

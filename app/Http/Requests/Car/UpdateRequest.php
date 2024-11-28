@@ -28,9 +28,9 @@ class UpdateRequest extends FormRequest
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'color_of_carcass' => 'required|string|max:255',
-            'gos_number' => ['required', 'integer',
+            'gos_number' => ['required', 'string', 'min:8', 'max:8',
                 Rule::unique('cars', 'gos_number')->ignore($this->car)],
-            'is_on_parking_now' => 'nullable'
+            'is_on_parking_now' => 'nullable|boolean'
         ];
 
 
@@ -42,10 +42,11 @@ class UpdateRequest extends FormRequest
             'brand.required' => 'Это поле должно быть заполнено',
             'model.required' => 'Это поле должно быть заполнено',
             'color_of_carcass.required' => 'Это поле должно быть заполнено',
+
             'gos_number.required' => 'Это поле должно быть заполнено',
             'gos_number.unique' => 'Такой номер уже зарегистрирован',
+            'gos_number.min' => 'Заполните номер полностю',
 
-            'phone_number.unique' => 'Этот номер уже внесен в базу',
         ];
     }
 }

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->tinyText('brand');
             $table->tinyText('model');
             $table->tinyText('color_of_carcass');
-            $table->bigInteger('gos_number')->unique();
+            $table->string('gos_number')->unique();
             $table->boolean('is_on_parking_now');
 
             $table->timestamps();

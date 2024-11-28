@@ -23,22 +23,30 @@ class StoreRequest extends FormRequest
     {
         return [
             'fio' => 'required|string|min:3',
-            'gender' => 'required|string|max:7',
-            'phone_number' => 'required|string|unique:clients,phone_number|max:255',
+            'gender' => 'required|boolean',
+            'phone_number' => [
+                'required',
+                'string',
+                'unique:clients,phone_number',
+                'max:255',
+                'regex:/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/'
+            ],
             'address' => 'nullable|string|max:255',
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
-            'color_of_carcass' => 'required|string|max:255',
-            'gos_number' => 'required|integer|unique:cars,gos_number',
-            'is_on_parking_now' => 'nullable'
+            'color_of_carcass' => 'required| string|max:255',
+            'gos_number' => 'required|string|min:8|max:8|unique:cars,gos_number',
+            'is_on_parking_now' => 'nullable|boolean'
         ];
     }
+
+
 
     public function messages()
     {
         return [
             'fio.required' => 'Это поле должно быть заполнено',
-            'gender.max' => 'Это поле должно быть заполнено',
+            'gender.boolean' => 'Это поле должно быть заполнено',
             'phone_number.required' => 'Это поле должно быть заполнено',
             'address.required' => 'Это поле должно быть заполнено',
             'brand.required' => 'Это поле должно быть заполнено',
@@ -48,7 +56,10 @@ class StoreRequest extends FormRequest
 
             'fio.min' => 'Это поле должно содержать минимум 3 символа',
             'phone_number.unique' => 'Такой номер уже зарегистрирован',
+            'phone_number.regex' => 'Заполните номер телефона',
             'gos_number.unique' => 'Такой номер уже зарегистрирован',
+            'gos_number.min' => 'Заполните номер полностью'
+
 
         ];
     }
