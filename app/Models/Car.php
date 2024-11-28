@@ -80,24 +80,6 @@ class Car extends Model
             ->get();
     }
 
-    public static function removeFromParking($carId)
-    {
-        DB::table('cars')
-            ->where('id', $carId)
-            ->update([
-                'is_on_parking_now' => 0
-            ]);
-    }
-
-    public static function addCarOnParking($carId)
-    {
-        DB::table('cars')
-            ->where('id', $carId)
-            ->update([
-                'is_on_parking_now' => 1
-            ]);
-    }
-
     public static function changeParkingStatus($carId, $status)
     {
         DB::table('cars')
@@ -106,5 +88,12 @@ class Car extends Model
                 'is_on_parking_now' => $status,
                 'updated_at' => Carbon::now()
             ]);
+    }
+
+    public static function getCarById($carId)
+    {
+        return DB::table('cars')
+            ->where('id', $carId)
+            ->first();
     }
 }

@@ -21,9 +21,6 @@ class ClientController extends Controller
 
         $data = $request->validated();
 
-        $data['gender'] == "Мужчина" ? $data['gender'] = 1 : $data['gender'] = 0;
-        $data['is_on_parking_now'] = isset ($data['is_on_parking_now']);
-
         Client::storeNewClient($data);
 
         Car::storeNewCar($data, Client::getLastClientId());
@@ -51,7 +48,7 @@ class ClientController extends Controller
     public function update($clientId, UpdateRequest $request)
     {
         $data = $request->validated();
-        $data['gender'] == "Мужчина" ? $data['gender'] = 1 : $data['gender'] = 0;
+
         Client::updateClient($clientId, $data);
         return redirect()->route('clients.edit', $clientId);
     }

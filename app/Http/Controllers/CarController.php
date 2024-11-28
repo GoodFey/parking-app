@@ -13,6 +13,9 @@ use Illuminate\Support\Facades\DB;
 
 class CarController extends Controller
 {
+    public function test(){
+        return view('clients.index');
+    }
     public function index()
     {
         $cars = Car::getAllCars()->paginate(10);
@@ -22,7 +25,8 @@ class CarController extends Controller
     public function update($carId, UpdateRequest $request)
     {
         $data = $request->validated();
-        $data['is_on_parking_now'] = isset ($data['is_on_parking_now']);
+
+//        $data['is_on_parking_now'] = isset ($data['is_on_parking_now']);
 
         Car::updateCar($carId, $data);
 
@@ -32,7 +36,8 @@ class CarController extends Controller
     public function store($clientId, StoreRequest $request)
     {
         $data = $request->validated();
-        $data['is_on_parking_now'] = isset ($data['is_on_parking_now']);
+
+
 
         Car::storeNewCar($data, $clientId);
         return redirect()->back();
@@ -40,7 +45,16 @@ class CarController extends Controller
 
     public function delete($carId)
     {
+        $currentCar = Car::getCarById($carId);
+        $currentClient = Client::getClient($currentCar->client_id);
         Car::deleteCar($carId);
+        $allCarsCurrentClient = Car::getCarsOfClient($currentClient->id)->toArray();
+
+        if($allCarsCurrentClient == null)
+        {
+            Client::deleteClient($currentClient->id);
+        }
+
         return redirect()->route('cars.index');
     }
 

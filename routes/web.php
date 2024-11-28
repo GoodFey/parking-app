@@ -5,7 +5,7 @@ use App\Http\Controllers\CarController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/cars', [CarController::class, 'index'])->name('cars.index');
+Route::get('/', [CarController::class, 'index'])->name('cars.index');
 
 Route::get('/cars/onParking/{client}', [CarController::class, 'onParking'])->name('cars.onParking');
 
