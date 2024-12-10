@@ -22,9 +22,18 @@ class CarFactory extends Factory
             'brand' => fake()->name,
             'model' => fake()->streetName,
             'color_of_carcass' => fake()->colorName,
-            'gos_number' => fake()->creditCardNumber,
+            'gos_number' => self::createGosNumber(),
             'is_on_parking_now' => fake()->boolean,
             'client_id' => Client::factory()->create()
         ];
+    }
+
+    public static function createGosNumber()
+    {
+        $pattern = "/^[АВЕКМНОРСТУХABEKMHOPCTYX]{1}[1-9]{3}[АВЕКМНОРСТУХABEKMHOPCTYX]{2}[1-9]{2}?/u";
+        do {
+            $gosNum = strtoupper(fake()->bothify("?###??##"));
+        } while (!preg_match($pattern, $gosNum));
+        return $gosNum;
     }
 }

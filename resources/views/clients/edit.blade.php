@@ -148,10 +148,9 @@
             <h3>Добавить новый автомобиль</h3>
             <form action="{{ route('cars.store', $client->id) }}" id="create_new_auto" method="Post">
                 @csrf
-                <div class="mb-3">
+                <div class="mb-3" id="app">
                     <label for="brandInput" class="form-label">Бренд автомобиля</label>
-                    <input type="text" class="form-control" id="brandInput" name="brand"
-                           placeholder="Обязательное поле" value="{{ old('brand') }}">
+                    <auto-compete :is-async="true"></auto-compete>
                     <div class="text-danger mt-1">
                         @error('brand')
                         {{ $message }}
@@ -182,6 +181,7 @@
                     <label for="gosNumberInput" class="form-label">Государственный номер</label>
                     <input type="text" class="form-control gos-number-input-class" id="gosNumberInput" name="gos_number"
                            placeholder="A001AA34" value="{{ old('gos_number') }}">
+
                     <div class="text-danger mt-1">
                         @error('gos_number')
                         {{ $message }}
