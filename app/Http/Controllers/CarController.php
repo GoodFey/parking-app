@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\DB;
 class CarController extends Controller
 {
     public function test(){
-        return view('clients.index');
+        return view('cars.test');
     }
     public function index()
     {

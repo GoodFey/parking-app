@@ -56,10 +56,11 @@
 
                 <h3>Добавить информацию об автомобиле</h3>
 
-                <div class="mb-3">
+                <div class="mb-3" id="app">
                     <label for="brandCarInput" class="form-label">Бренд автомобиля</label>
-                    <input type="text" class="form-control" id="brandCarInput" name="brand"
-                           placeholder="Обязательное поле" value="{{ old('brand') }}">
+{{--                    <input type="text" class="form-control" id="brandCarInput" name="brand"--}}
+{{--                           placeholder="Обязательное поле" value="{{ old('brand') }}">--}}
+                    <auto-compete :is-async="true"></auto-compete>
                     @error('brand')
                     <div class="text-danger mt-1">
                         {{ $message }}

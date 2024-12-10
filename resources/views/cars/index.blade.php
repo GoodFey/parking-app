@@ -3,19 +3,6 @@
 @section('title', 'Все машины')
 
 @section('content')
-{{--<div class="container text-center">--}}
-{{--    <div class="row">--}}
-{{--        <div class="col-6">--}}
-{{--            <h1>Все клиенты и машины</h1>--}}
-{{--        </div>--}}
-{{--        <form class="col" action="{{ route('cars.onParking', '0') }}">--}}
-{{--            <input type="submit" class="btn btn-primary mt-2" value="Ввести машину на парковку">--}}
-{{--        </form>--}}
-{{--        <form class="col" action="{{ route('clients.create') }}">--}}
-{{--            <input type="submit" class="btn btn-info mt-2" value="Создать нового клиента">--}}
-{{--        </form>--}}
-{{--    </div>--}}
-{{--</div>--}}
 
 <div class="container">
 
