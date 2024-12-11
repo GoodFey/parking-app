@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('cars_brands', function (Blueprint $table) {
             $table->id();
             $table->string('car_brand');
+            $table->timestamps();
         });
     }
 

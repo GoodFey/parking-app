@@ -7,6 +7,7 @@
             @keydown.down="onArrowDown"
             @keydown.up="onArrowUp"
             @keydown.enter="onEnter"
+            @blur="onBlur"
             class="form-control"
             name="brand"
         />
@@ -74,9 +75,13 @@ export default {
         document.removeEventListener('click', this.handleClickOutside)
     },
     methods: {
+        onBlur() {
+            this.emitBrand();
+        },
         setResult(result) {
             this.search = result;
             this.isOpen = false;
+            this.$emit('select', result);
         },
         filterResults() {
             this.results = this.items.filter((item) => {
@@ -119,9 +124,9 @@ export default {
 
             try {
                 // Отправляем запрос к серверу
-                const response = await fetch(`https://parking-app.loc/api/cars-brands/${encodeURIComponent(query)}`);
+                const response = await fetch(`/api/cars-brands/${encodeURIComponent(query)}`);
                 const data = await response.json();
-                // console.log(data)
+
                 // Обновляем результаты
                 this.results = data;
                 console.log(this.results)
@@ -132,6 +137,10 @@ export default {
                 this.isLoading = false;
             }
         },
+        emitBrand(){
+            this.$emit('select', this.search.trim())
+        }
+
     },
 };
 </script>

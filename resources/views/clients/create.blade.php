@@ -60,23 +60,23 @@
                     <label for="brandCarInput" class="form-label">Бренд автомобиля</label>
 {{--                    <input type="text" class="form-control" id="brandCarInput" name="brand"--}}
 {{--                           placeholder="Обязательное поле" value="{{ old('brand') }}">--}}
-                    <auto-compete :is-async="true"></auto-compete>
+                    <car-brand-auto-complete></car-brand-auto-complete>
                     @error('brand')
                     <div class="text-danger mt-1">
                         {{ $message }}
                     </div>
                     @enderror
                 </div>
-                <div class="mb-3">
-                    <label for="modelCarInput" class="form-label">Модель автомобиля</label>
-                    <input type="text" class="form-control" id="modelCarInput" name="model"
-                           placeholder="Обязательное поле" value="{{ old('model') }}">
-                    @error('model')
-                    <div class="text-danger mt-1">
-                        {{ $message }}
-                    </div>
-                    @enderror
-                </div>
+{{--                <div class="mb-3">--}}
+{{--                    <label for="modelCarInput" class="form-label">Модель автомобиля</label>--}}
+{{--                    <input type="text" class="form-control" id="modelCarInput" name="model"--}}
+{{--                           placeholder="Обязательное поле" value="{{ old('model') }}">--}}
+{{--                    @error('model')--}}
+{{--                    <div class="text-danger mt-1">--}}
+{{--                        {{ $message }}--}}
+{{--                    </div>--}}
+{{--                    @enderror--}}
+{{--                </div>--}}
                 <div class="mb-3">
                     <label for="colorCarInput" class="form-label">Цвет автомобиля</label>
                     <input type="text" class="form-control" id="colorCarInput" name="color_of_carcass"
