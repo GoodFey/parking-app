@@ -2,6 +2,7 @@
 
 namespace App\Console\Commands;
 
+use App\Models\Car;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
@@ -28,13 +29,9 @@ class dev extends Command
     public function handle()
     {
 
-//        $currentModels = DB::table('cars_brands')
-//        ->join('cars_models', 'cars_brands.id', '=', 'cars_models.car_brand_id')
-//        ->where('car_brand', 'like', $brand)
-//        ->limit(10)
-//        ->pluck('car_model');
-
-
-//        dd($currentModels);
+        $cars = Car::getAllCars()->get();
+        foreach ($cars as $car) {
+            dump($car);
+        }
     }
 }

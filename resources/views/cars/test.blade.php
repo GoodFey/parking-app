@@ -15,11 +15,8 @@
 
 <div id="app">
 
-    <auto-compete
-        :is-async="true"
-
-    ></auto-compete>
-    <model-dropdown></model-dropdown>
+    <example-component
+    :is-async="true"></example-component>
 
 </div>
 </body>
