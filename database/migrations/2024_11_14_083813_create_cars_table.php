@@ -20,6 +20,7 @@ return new class extends Migration
             $table->tinyText('color_of_carcass');
             $table->string('gos_number')->unique();
             $table->boolean('is_on_parking_now');
+            $table->string('path');
 
             $table->timestamps();
         });

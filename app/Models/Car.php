@@ -50,6 +50,8 @@ class Car extends Model
                 'is_on_parking_now' => $data['is_on_parking_now'],
                 'updated_at' => Carbon::now()
             ]);
+
+
     }
 
     public static function deleteCarsThisClient($clientId)
