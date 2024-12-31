@@ -36,7 +36,8 @@ class StoreRequest extends FormRequest
             'model' => 'required|string|max:255',
             'color_of_carcass' => 'required| string|max:255',
             'gos_number' => 'required|string|min:8|max:8|unique:cars,gos_number',
-            'is_on_parking_now' => 'nullable|boolean'
+            'is_on_parking_now' => 'nullable|boolean',
+            'hiddenImageId' => 'nullable|numeric'
         ];
     }
 

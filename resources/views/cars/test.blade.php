@@ -14,11 +14,11 @@
 <body>
 
 <div id="app">
-    <auto-compete
-    :is-async="true"
-    ></auto-compete>
-</div>
 
+    <example-component
+    :is-async="true"></example-component>
+
+</div>
 </body>
 </html>
 @endsection

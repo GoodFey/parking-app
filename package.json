@@ -20,7 +20,9 @@
         "vue": "^3.2.37"
     },
     "dependencies": {
+        "dropzone": "^6.0.0-beta.2",
         "imask": "^7.6.1",
+        "vite-plugin-vue-devtools": "^7.6.8",
         "vue-loader": "^17.4.2"
     }
 }
