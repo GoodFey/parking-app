@@ -28,8 +28,7 @@ class UpdateRequest extends FormRequest
             'brand' => 'required|string|max:255',
             'model' => 'required|string|max:255',
             'color_of_carcass' => 'required|string|max:255',
-            'gos_number' => ['required', 'string', 'min:8', 'max:8',
-                Rule::unique('cars', 'gos_number')->ignore($this->car)],
+            'gos_number' => ['required', 'string', 'min:8', 'max:8'],
             'is_on_parking_now' => 'nullable|boolean'
         ];
 

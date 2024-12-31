@@ -6,8 +6,7 @@ use App\Http\Requests\Client\StoreRequest;
 use App\Http\Requests\Client\UpdateRequest;
 use App\Models\Car;
 use App\Models\Client;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
+use App\Models\ImageCar;
 
 class ClientController extends Controller
 {
@@ -23,7 +22,9 @@ class ClientController extends Controller
 
         Client::storeNewClient($data);
 
-        Car::storeNewCar($data, Client::getLastClientId());
+        $currentCar = Car::storeNewCar($data, Client::getLastClientId());
+
+        $data['hiddenImageId'] ? ImageCar::store($currentCar->id, $data['hiddenImageId']) : false;
 
         return redirect()->route('cars.index');
     }

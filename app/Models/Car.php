@@ -17,23 +17,27 @@ class Car extends Model
 
     static function storeNewCar($data, $currentClientId)
     {
-        DB::table('cars')
-            ->insert([
-                'brand' => $data['brand'],
-                'model' => $data['model'],
-                'color_of_carcass' => $data['color_of_carcass'],
-                'gos_number' => $data['gos_number'],
-                'is_on_parking_now' => $data['is_on_parking_now'],
-                'client_id' => $currentClientId,
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now()
-            ]);
+        return Car::create([
+            'brand' => $data['brand'],
+            'model' => $data['model'],
+            'color_of_carcass' => $data['color_of_carcass'],
+            'gos_number' => $data['gos_number'],
+            'is_on_parking_now' => $data['is_on_parking_now'],
+            'client_id' => $currentClientId,
+            'created_at' => Carbon::now(),
+            'updated_at' => Carbon::now()
+        ]);
+
     }
 
     static function getCarsOfClient($clientId)
     {
         return DB::table('cars')
+            ->join('clients', 'cars.client_id', '=', 'clients.id')
+            ->leftJoin('images_cars', 'cars.id', '=', 'images_cars.car_id')
+            ->leftJoin('images', 'images_cars.image_id', '=', 'images.id')
             ->where('client_id', $clientId)
+            ->select('cars.id as car_id', 'images.id as image_id', 'cars.*', 'clients.*', 'images.*')
             ->get();
     }
 
@@ -74,6 +78,18 @@ class Car extends Model
             ->orderBy('id', 'desc');
     }
 
+    public static function getCarsClientsImages()
+    {
+
+        return DB::table('cars')
+            ->join('clients', 'cars.client_id', '=', 'clients.id')
+            ->leftJoin('images_cars', 'cars.id', '=', 'images_cars.car_id')
+            ->leftJoin('images', 'images_cars.image_id', '=', 'images.id')
+            ->select('cars.id as car_id', 'cars.*', 'clients.*', 'images.*')
+            ->orderBy('cars.id', 'desc');
+
+    }
+
     public static function getCarsOnParking()
     {
         return DB::table('cars')
@@ -96,6 +112,19 @@ class Car extends Model
     {
         return DB::table('cars')
             ->where('id', $carId)
+            ->first();
+    }
+
+
+    public static function getCarAndImageById($carId)
+    {
+
+        return DB::table('cars')
+            ->join('clients', 'cars.client_id', '=', 'clients.id')
+            ->leftJoin('images_cars', 'cars.id', '=', 'images_cars.car_id')
+            ->leftJoin('images', 'images_cars.image_id', '=', 'images.id')
+            ->select('cars.id as car_id', 'images.id as image_id', 'cars.*', 'clients.*', 'images.*')
+            ->where('cars.id', $carId)
             ->first();
     }
 }

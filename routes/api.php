@@ -1,15 +1,9 @@
 <?php
 
 use App\Http\Controllers\API\CarController;
-use App\Http\Requests\Car\StoreRequest;
-use App\Models\Car;
-use Illuminate\Http\Request;
+use App\Http\Controllers\Image\StoreController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-})->middleware('auth:sanctum');
 
 Route::get('/cars-brands/{partQuery}', function ($partQuery) {
 
@@ -41,3 +35,16 @@ Route::patch('/update/car/{id}', [CarController::class, 'update']);
 Route::post('/create/car/{clientId}', [CarController::class, 'store']);
 
 Route::delete('/delete/car/{carId}', [CarController::class, 'delete']);
+
+
+Route::group(['prefix' => 'image', 'namespace' => 'App\Http\Controllers\Image'], function () {
+    Route::post('/store', 'StoreController');
+    Route::delete('/delete/{imageId}', 'DeleteController');
+});
+
+
+//Route::post('/image/', function (){
+//    return response()->json('ok');
+//});
+
+

@@ -26,13 +26,14 @@ Route::post('/cars/{car}', [CarController::class, 'store'])->name('cars.store');
 
 Route::delete('/cars/delete/{car}', [CarController::class, 'delete'])->name('cars.delete');
 
+
 Route::patch('cars/onParking/{car}', [CarController::class, 'removeFromParking'])
     ->name('cars.removeFromParking');
 
 Route::patch('/cars/onParkingAdd/{car}', [CarController::class, 'updateParkingStatus'])
     ->name('cars.updateParkingStatus');
 
-
+Route::delete('/image/delete/{imageId}', [CarController::class, 'deleteImage'])->name('cars.deleteImage');
 
 
 

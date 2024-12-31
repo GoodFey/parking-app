@@ -28,6 +28,7 @@ class StoreRequest extends FormRequest
             'gos_number' => 'required|string|min:8|max:8|unique:cars,gos_number',
             'is_on_parking_now' => 'nullable|boolean',
             'client_id' => 'exists:clients,id',
+            'hiddenImageId' => 'nullable'
         ];
     }
     public function messages(): array
