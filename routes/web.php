@@ -26,7 +26,6 @@ Route::post('/cars/{car}', [CarController::class, 'store'])->name('cars.store');
 
 Route::delete('/cars/delete/{car}', [CarController::class, 'delete'])->name('cars.delete');
 
-
 Route::patch('cars/onParking/{car}', [CarController::class, 'removeFromParking'])
     ->name('cars.removeFromParking');
 
