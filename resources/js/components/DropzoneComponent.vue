@@ -4,7 +4,7 @@
         Upload
     </div>
     <!--    <input type="text" v-model="value" placeholder="Введите значение из Vue">-->
-        <input type="hidden" ref="hiddenInput" :value="value" name="hiddenImageId">
+    <input type="hidden" ref="hiddenInput" :value="value" name="hiddenImageId">
 
 </template>
 
@@ -36,6 +36,13 @@ export default {
             removedfile: (file) => {
                 file.previewElement.remove()
                 this.delete()
+            },
+            init: function () {
+                this.on("addedfile", function (file) {
+                    if (this.files.length > 1) {
+                        this.removeFile(this.files[0]); // Удаляем старый файл
+                    }
+                });
             }
         })
     },
