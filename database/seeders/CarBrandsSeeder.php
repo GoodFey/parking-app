@@ -40,14 +40,6 @@ class CarBrandsSeeder extends Seeder
                 ]);
             }
         }
-//        foreach (array_unique($brands) as $brand) {
-//            DB::table('cars_brands')
-//                ->insert([
-//                    'car_brand' => $brand,
-//                    'car_model' => $models
-//                ]);
-//        }
-
     }
 
 }
