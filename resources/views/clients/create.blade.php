@@ -57,7 +57,6 @@
                     <h3>Добавить информацию об автомобиле</h3>
 
                     <div class="mb-3" id="app">
-                        <label for="brandCarInput" class="form-label">Бренд автомобиля</label>
                         <car-brand-auto-complete></car-brand-auto-complete>
                         <dropzone-component></dropzone-component>
                         @error('brand')

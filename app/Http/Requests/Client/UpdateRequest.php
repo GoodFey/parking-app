@@ -28,8 +28,8 @@ class UpdateRequest extends FormRequest
             'fio' => 'required|string|min:3|max:100',
             'gender' => 'required|boolean',
             'phone_number' => ['required', 'string',
-                Rule::unique('clients', 'phone_number')->ignore($this->client),
-                'regex:/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/'],
+                Rule::unique('clients', 'phone_number')->ignore($this->client),],
+//                'regex:/^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/'],
             'address' => 'nullable|string|max:255',
         ];
 

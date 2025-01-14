@@ -3,7 +3,6 @@
     <div ref="dropzone" class="mt-3 btn d-block bg-dark p-5 text-center text-light">
         Upload
     </div>
-    <!--    <input type="text" v-model="value" placeholder="Введите значение из Vue">-->
     <input type="hidden" ref="hiddenInput" :value="value" name="hiddenImageId">
 
 </template>
@@ -14,6 +13,7 @@ import Dropzone from 'dropzone'
 
 export default {
     name: "DropzoneComponent",
+    emits: ['image-uploaded'],
     data() {
         return {
             dropzone: null,
@@ -32,6 +32,7 @@ export default {
             success: (file, response) => {
                 this.currentImageId = response['imageId']
                 this.$refs.hiddenInput.value = response['imageId']
+                this.$emit('image-uploaded', this.currentImageId);
             },
             removedfile: (file) => {
                 file.previewElement.remove()

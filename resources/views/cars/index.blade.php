@@ -4,6 +4,17 @@
 
 @section('content')
 
+{{--    <form action="" method="Post">--}}
+{{--        @csrf--}}
+{{--        <div id="app" class="w-25 p-5">--}}
+{{--            <phone-input-mask--}}
+{{--                value="{{ old('phone_number', '') }}"--}}
+{{--            ></phone-input-mask>--}}
+{{--        </div>--}}
+{{--        <input type="submit" class="btn btn-info">--}}
+{{--    </form>--}}
+
+
     <div class="container">
         <table class="table table-secondary table-hover">
             <thead>

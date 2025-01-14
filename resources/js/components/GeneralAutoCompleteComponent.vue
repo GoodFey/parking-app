@@ -3,10 +3,12 @@
         <search-autocomplete
             :isAsync="true"
             @select="setBrand"
+            ref="brandAutoComplete"
         />
         <model-dropdown
             :selectedBrand="selectedBrand"
             @select="setModel"
+            ref="modelAutoComplete"
         />
     </div>
 </template>
@@ -16,6 +18,7 @@ import SearchAutocomplete from './AutocompleteComponent.vue';
 import ModelDropdown from './ModelDropdownComponent.vue';
 
 export default {
+
     components: { SearchAutocomplete, ModelDropdown },
     data() {
         return {
@@ -27,11 +30,16 @@ export default {
         setBrand(brand) {
             this.selectedBrand = brand;
             this.selectedModel = ''; // Сбрасываем выбранную модель
+            this.$emit('getBrand', brand)
         },
         setModel(model) {
             this.selectedModel = model;
             console.log(`Selected: ${this.selectedBrand} - ${this.selectedModel}`);
+            this.$emit('getModel', model)
         },
     },
+    mounted() {
+
+    }
 };
 </script>

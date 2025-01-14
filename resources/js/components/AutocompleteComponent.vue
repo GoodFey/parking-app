@@ -1,5 +1,6 @@
 <template>
     <div class="autocomplete">
+        <label for="brandCarInput" class="form-label">Бренд автомобиля</label>
         <input
             type="text"
             @input="onChange"
@@ -10,6 +11,7 @@
             @blur="onBlur"
             class="form-control"
             name="brand"
+            placeholder="Начните вводить бренд авто"
         />
         <ul
             id="autocomplete-results"
@@ -70,6 +72,7 @@ export default {
     },
     mounted() {
         document.addEventListener('click', this.handleClickOutside)
+
     },
     destroyed() {
         document.removeEventListener('click', this.handleClickOutside)
@@ -82,6 +85,7 @@ export default {
             this.search = result;
             this.isOpen = false;
             this.$emit('select', result);
+
         },
         filterResults() {
             this.results = this.items.filter((item) => {
@@ -121,7 +125,6 @@ export default {
             this.arrowCounter = -1;
         },
         async fetchResults(query) {
-
             try {
                 // Отправляем запрос к серверу
                 const response = await fetch(`/api/cars-brands/${encodeURIComponent(query)}`);
@@ -139,6 +142,9 @@ export default {
         },
         emitBrand(){
             this.$emit('select', this.search.trim())
+        },
+        setValue(value) {
+            this.search = value
         }
 
     },
