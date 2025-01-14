@@ -11,16 +11,13 @@ use App\Models\Car;
 use App\Models\Client;
 use App\Models\Image;
 use App\Models\ImageCar;
+use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 
 
 class CarController extends Controller
 {
-    public function test()
-    {
-        return view('cars.test');
-    }
 
     public function index()
     {

@@ -6,8 +6,11 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Car\StoreRequest;
 use App\Http\Requests\Car\UpdateRequest;
 use App\Models\Car;
-use Illuminate\Http\Request;
+use App\Models\Client;
+use App\Models\ImageCar;
+use App\Services\ImageDeleteService;
 use Illuminate\Support\Facades\Validator;
+
 
 class CarController extends Controller
 {
@@ -27,7 +30,7 @@ class CarController extends Controller
         ]);
 
         if ($validId->fails()) {
-            return response()->json($validId->errors(), 404);
+            return response()->json($validId->errors(), 400);
         }
         $car = Car::getCarById($id);
         return response()->json($car);
@@ -44,13 +47,15 @@ class CarController extends Controller
             ]);
 
         if ($validClientId->fails()) {
-            return response()->json($validClientId->errors(), 404);
+            return response()->json($validClientId->errors(), 400);
         }
 
         $data = $request->validated();
-        Car::storeNewCar($data, $clientId);
 
-        return response()->json(Car::getCarsOfClient($clientId));
+        $currentCar = Car::storeNewCar($data, $clientId);
+
+        $data['hiddenImageId'] ? ImageCar::store($currentCar->id, $data['hiddenImageId']) : false;
+        return response()->json(Car::getCarById($currentCar->id), 201);
     }
 
     public static function update(UpdateRequest $request, $carId)
@@ -65,15 +70,19 @@ class CarController extends Controller
 
         $data = $request->validated();
 
+        $data['hiddenImageId'] ? ImageCar::store($carId, $data['hiddenImageId']) : false;
+
         if ($validClientId->fails()) {
-            return response()->json($validClientId->errors(), 404);
+            return response()->json($validClientId->errors(), 400);
         } else {
             Car::updateCar($carId, $data);
-            return response()->json(Car::getCarById($carId));
+            return response()->json(Car::getCarById($carId), 201);
         }
 
     }
-    public static function delete($carId){
+
+    public static function delete($carId)
+    {
 
         $validClientId = Validator::make(['id' => $carId], [
             'id' => 'required|numeric|exists:cars,id|digits_between:1,10'
@@ -83,11 +92,22 @@ class CarController extends Controller
             ]);
 
         if ($validClientId->fails()) {
-            return response()->json($validClientId->errors(), 404);
+            return response()->json($validClientId->errors(), 400);
         }
 
-        Car::deleteCar($carId);
-        return response()->json("Car with id - {$carId} was deleted");
+        $currentCar = Car::getCarAndImageById($carId);
+        $currentClient = Client::getClient($currentCar->client_id);
+
+        $imageDeleteService = app(ImageDeleteService::class);
+        $imageDeleteService->deleteImage($currentCar);
+
+        // Проверка. Если у клиента не осталось машин, он тоже будет удален
+        $allCarsCurrentClient = Car::getCarsOfClient($currentClient->id)->toArray();
+        if ($allCarsCurrentClient == null) {
+            Client::deleteClient($currentClient->id);
+        }
+
+        return response(status: 204);
     }
 
 }

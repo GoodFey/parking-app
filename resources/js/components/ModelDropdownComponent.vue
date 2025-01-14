@@ -1,5 +1,5 @@
 <template>
-    <div class="autocomplete">
+    <div class="autocomplete mb-3">
         <label for="modelCarInput" class="form-label mt-3">Модель автомобиля</label>
         <input
             type="text"
@@ -90,11 +90,14 @@ export default {
         },
         onBlur() {
             console.log('Input field blurred');
+            this.$emit('select', this.search); // Эмитим выбранную модель
             // Закрываем список с небольшой задержкой, чтобы успел сработать @click
             setTimeout(() => {
                 this.isOpen = false;
                 console.log('Dropdown closed after blur');
             }, 200);
+
+
         },
         setModel(model) {
             console.log('Model selected:', model);
@@ -102,6 +105,9 @@ export default {
             this.isOpen = false; // Закрываем список
             this.$emit('select', model); // Эмитим выбранную модель
         },
+        setValue(value) {
+            this.search = value
+        }
     },
 };
 </script>

@@ -42,12 +42,15 @@ class ClientController extends Controller
         $client = Client::getClient($clientId);
         $cars = Car::getCarsOfClient($clientId);
 
+        // Получение ошибок из сессии
+        $errors = session()->get('errors') ? session()->get('errors')->toArray() : [];
 
-        return view('clients.edit', compact('client', 'cars'));
+        return view('clients.edit', compact('client', 'cars', 'errors'));
     }
 
     public function update($clientId, UpdateRequest $request)
     {
+
         $data = $request->validated();
 
         Client::updateClient($clientId, $data);

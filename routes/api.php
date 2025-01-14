@@ -1,7 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\CarController;
-use App\Http\Controllers\Image\StoreController;
+use App\Http\Controllers\API\ClientController;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
@@ -42,9 +42,7 @@ Route::group(['prefix' => 'image', 'namespace' => 'App\Http\Controllers\Image'],
     Route::delete('/delete/{imageId}', 'DeleteController');
 });
 
-
-//Route::post('/image/', function (){
-//    return response()->json('ok');
-//});
+Route::patch('/clients/edit/{client}', [ClientController::class, 'update']);
+Route::delete('/clients/delete/{client}', [ClientController::class, 'delete']);
 
 

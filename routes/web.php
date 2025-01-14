@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/', [CarController::class, 'index'])->name('cars.index');
+
 Route::get('/test', [CarController::class, 'test']);
 
 Route::get('/cars/onParking/{client}', [CarController::class, 'onParking'])->name('cars.onParking');
@@ -33,6 +34,5 @@ Route::patch('/cars/onParkingAdd/{car}', [CarController::class, 'updateParkingSt
     ->name('cars.updateParkingStatus');
 
 Route::delete('/image/delete/{imageId}', [CarController::class, 'deleteImage'])->name('cars.deleteImage');
-
 
 
